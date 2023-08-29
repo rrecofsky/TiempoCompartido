@@ -1,0 +1,149 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/site.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width"/>
+    
+    <!-- NO CACHE! -->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    
+    <!-- HTML Meta Tags -->
+    <title>Tiempo Restante</title>
+    <meta charset="utf-8"/>
+    <meta name="description" content="Tiempo Restante para compartir">
+    <meta name="author" content="Ricardo Recofsky" />
+    <meta name="copyright" content="Ricardo Recofsky" />
+    <meta name="keywords" content="amistad, tiempo, amor">
+    <meta name="resource-type" content="document">
+    <meta name="robots" content="all">
+    
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="Tiempo Compartido">
+    <meta itemprop="description" content="Tiempo restante con seres queridos">
+    <meta itemprop="image" content="">
+    
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="http://">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Tiempo Compartido">
+    <meta property="og:description" content="Tiempo Compartido">
+    <meta property="og:image" content="">
+    
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tiempo Compartido">
+    <meta name="twitter:description" content="Tiempo Compartido">
+    <meta name="twitter:image" content="">
+  
+</head>
+<body class="cuerpo cuerpo-movil cuerpo-movil-landscape">
+    
+<div class="">
+     <table class="table table-responsive" style="text-align: center; border: none; ">
+        <tbody>
+             <tr>
+                <td style="border:none; text-align: center;">
+                       
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/0AIlz08fZos?si=oBKOG_zr3EhFjkcl" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+					</iframe>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+			<?php							
+			$resultado = "";							
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			
+				$anios = isset($_POST["anios"]) ? $_POST["anios"] : 0;
+				$nombreAmigo = $_POST["nombreAmigo"];
+				$hsCompartidas = isset($_POST["hsCompartidas"]) ? $_POST["hsCompartidas"] : 0;
+				$edad = isset($_POST["edad"]) ? $_POST["edad"] : 0;
+				$edadAmigo = isset($_POST["edadAmigo"]) ? $_POST["edadAmigo"] : 0;
+				$aniosFuturos = 0;
+				
+				if ( $edad > $edadAmigo){
+					$aniosFuturos = $edad - 95;
+				}else{
+					$aniosFuturos = $edadAmigo - 95;
+				}
+				$aniosFuturos
+				
+				
+				$promedioPorAnio = $hsCompartidas / $anios; //hs sobre anios es el promedio por anio
+				$tiempoProyectado = $promedioPorAnio * $aniosFuturos;	
+				
+				$dias = $tiempoProyectado / 24;
+				$horasRestantes = $tiempoProyectado % 24;
+				$minutos = $horasRestantes * 60;
+				
+				$resultado = "Vas a compartir $dias dias, $horasRestantes horas y $minutos minutos con $nombreAmigo ";
+			}			
+			?>
+							
+    <table class="table table-responsive table-hover table_mrg table_mrg_movil_landscape" style="text-align: center; border: 2px solid white">
+            <tbody>
+                <tr>
+                    <td>
+                        
+						<form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="post">
+							  <div class="mb-3">
+									<label for="" class="form-label">En los ultimos</label>
+									<input type="number" class="tiempo" id="anios" >
+									<label for="" class="form-label"> años, comparti con </label>
+									<input type="text" class="" id="nombreAmigo" >
+									<label for="" class="form-label"> algo de </label>
+									<input type="text" class="tiempo" id="hsCompartidas" >
+									<label for="" class="form-label"> horas.</label>
+							  </div>
+							  <div class="mb-3">
+									<label for="" class="form-label">Yo tengo</label>
+									<input type="number" class="tiempo" id="edad" aria-describedby="emailHelp">
+									<label for="" class="form-label"> años, y mi amigo/a tiene </label>
+									<input type="number" class="tiempo" id="edadAmigo" aria-describedby="emailHelp">
+									<label for="" class="form-label"> y quiero saber cuanto tiempo mas voy a compartir con él/ella. </label>
+							  </div>				
+								<br>							  
+							  <button type="submit" class="btn btn-primary">Calcular</button>
+						</form>
+						
+						<?php
+							if (!empty($resultado)) {
+								echo "<h2>Resultado:</h2>";
+								echo "<p>$resultado</p>";
+							}
+						?>
+                        
+                    </td>
+                </tr>
+            </tbody>
+    </table>    
+    <table class="table table-responsive table-hover table_mrg " style="text-align: center; border: 2px solid white">
+            <tbody>
+                <tr>
+                    <td>
+                        <a  title="Facebook"  style="padding-inline: 5%;" target="_blank" href="#">
+                            <img class="social" src="img/fb.png" alt="Facebook" ><a/>
+                        <a  title="Instagram"  style="padding-inline: 5%;" target="_blank" href="#">
+                             <img class="social"  da src="img/ins.png" alt="Instagram" ></a>
+                        <a  title="Youtube"  style="padding-inline: 5%;" target="_blank" href="#">
+                             <img class="social"  da src="img/social-youtube-svgrepo-com.svg" alt="Youtube" ></a>
+                        <a  title="Web"  style="padding-inline: 5%;" target="_blank" href="#">
+                             <img class="social"   src="img/st.png" alt="web" ></a>
+                        <a  title="TikTok"  style="padding-inline: 5%;" target="_blank" href="#">
+                             <img class="social"   src="img/tiktok-logo-4500.svg" alt="tiktok" ></a>
+                        <a  title="Twitter"  style="padding-inline: 5%;" target="_blank" href="#">
+                             <img class="social"  da src="img/tw.png" alt="Twitter" ></a>
+                    </td>
+                </tr>
+            </tbody>
+    </table>
+    
+</div>
+</body>
+</html>
